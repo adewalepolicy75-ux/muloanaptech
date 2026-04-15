@@ -12,12 +12,12 @@ export default function Services() {
 
   return (
     <section className="services-section">
-      <h2>My Services</h2>
+      <h2>About us</h2>
 
       <div className="services-grid">
-        {services.map((item, index) => (
+        {services.map((i, index) => (
           <div key={index} className="service-card">
-            {item}
+            {i}
           </div>
         ))}
       </div>

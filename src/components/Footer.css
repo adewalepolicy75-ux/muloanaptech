@@ -4,6 +4,8 @@
   margin-top: 80px;
   padding-top: 60px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: space-between;
 }
 
 .footer-container {
