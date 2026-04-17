@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Services() {
+export default function About() {
   const services = [
     "Web Development",
     "Frontend Development",
