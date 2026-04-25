@@ -5,45 +5,6 @@ import "./Home.css";
 const Home = () => {
   return (
     <div className="home-container">
-      {/* Navigation Bar */}
-      <nav className="navbar">
-        <div className="nav-container">
-          <div className="logo">LoanAptech</div>
-          <ul className="nav-menu">
-            <li>
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/loans" className="nav-link">
-                Loans
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="nav-link">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="nav-link">
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link to="/login" className="nav-link">
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link to="/reset-password" className="nav-link">
-                <button>sign up</button>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <div className="hero-section">
         <h1 className="hero-title">Welcome to LoanAptech</h1>
