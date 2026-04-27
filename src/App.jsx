@@ -9,6 +9,7 @@ import Terms from "./components/Terms";
 import Faq from "./components/Faq";
 import Home from "./pages/Home";
 import Signup from "./components/Signup";
+import Login from "./components/Login";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        
         </Routes>
         <Footer />
       </div>
