@@ -10,6 +10,7 @@ import Faq from "./components/Faq";
 import Home from "./pages/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+<Route path="/dashboard" element={<Dashboard />} />
         
         </Routes>
         <Footer />
