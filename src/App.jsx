@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Signup from "./components/Signup";
 import Login from "./components/login";
 import Dashboard from "./components/Dashboard";
+import ApplyLoan from "./components/ApplyLoan";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 <Route path="/dashboard" element={<Dashboard />} />
+<Route path="/apply" element={<ApplyLoan />} />
         
         </Routes>
         <Footer />
