@@ -19,9 +19,12 @@ const Dashboard = () => {
       setLoading(true);
 
       // Fetch current user
-      const userResponse = await fetch("http://localhost:5000/api/auth/me", {
-        credentials: "include",
-      });
+      const userResponse = await fetch(
+        "http://localhost:5000/api/auth/me",
+        {
+          credentials: "include",
+        },
+      );
 
       if (!userResponse.ok) {
         throw new Error("Not authenticated");

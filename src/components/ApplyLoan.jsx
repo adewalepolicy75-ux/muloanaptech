@@ -27,19 +27,22 @@ const ApplyLoan = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/loans/apply", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
+      const response = await fetch(
+        "https://muloanaptech.onrender.com/api/loans/apply",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(formData),
         },
-        credentials: "include",
-        body: JSON.stringify(formData)
-      });
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        navigate("/dashboard");
+        navigate("/loan");
       } else {
         setError(data.error || "Application failed");
       }
