@@ -39,3 +39,4 @@ app.listen(PORT, () => {
 });
 
 console.log("MONGO_URI from env:", process.env.MONGO_URI ? "SET" : "NOT SET");
+// Force redeploy Mon, May  4, 2026  3:01:34 PM
