@@ -40,3 +40,9 @@ app.listen(PORT, () => {
 
 console.log("MONGO_URI from env:", process.env.MONGO_URI ? "SET" : "NOT SET");
 // Force redeploy Mon, May  4, 2026  3:01:34 PM
+
+// Debug route - log all requests
+app.use("*", (req, res) => {
+  console.log("Request received:", req.method, req.originalUrl);
+  res.status(404).json({ error: "Route not found", path: req.originalUrl });
+});
