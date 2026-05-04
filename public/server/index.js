@@ -38,3 +38,4 @@ app.listen(PORT, () => {
   console.log(` Server running on port ${PORT}`);
 });
 
+console.log("MONGO_URI from env:", process.env.MONGO_URI ? "SET" : "NOT SET");
