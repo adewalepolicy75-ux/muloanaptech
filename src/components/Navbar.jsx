@@ -15,9 +15,12 @@ function Navbar() {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/me", {
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://muloanaptech.onrender.com/api/auth/me",
+        {
+          credentials: "include",
+        },
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -34,7 +37,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/api/auth/logout", {
+      await fetch("https://muloanaptech.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

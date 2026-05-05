@@ -25,7 +25,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "https://muloanaptech.onrender.com/api/auth/login",
+        "https://muloanaptech-1.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {

@@ -20,7 +20,7 @@ const Dashboard = () => {
 
       // Fetch current user
       const userResponse = await fetch(
-        "https://muloanaptech.onrender.com/api/auth/me",
+        "https://muloanaptech-1.onrender.com/api/auth/me",
         {
           credentials: "include",
         },
@@ -35,7 +35,7 @@ const Dashboard = () => {
 
       // Fetch dashboard stats
       const statsResponse = await fetch(
-        "https://muloanaptech.onrender.com/api/loans/dashboard/stats",
+        "https://muloanaptech-1.onrender.com/api/loans/dashboard/stats",
         {
           credentials: "include",
         },
@@ -47,7 +47,7 @@ const Dashboard = () => {
       }
 
       const loansResponse = await fetch(
-        "https://muloanaptech.onrender.com/api/loans/my-loans",
+        "https://muloanaptech-1.onrender.com/api/loans/my-loans",
         {
           credentials: "include",
         },
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch("https://muloanaptech.onrender.com/api/auth/logout", {
+      await fetch("https://muloanaptech-1.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

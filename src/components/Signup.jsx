@@ -49,7 +49,7 @@ const Signup = () => {
 
     try {
       const response = await fetch(
-        "https://muloanaptech.onrender.com/api/auth/register",
+        "https://muloanaptech-1.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: {
