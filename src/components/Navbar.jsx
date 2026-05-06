@@ -16,7 +16,7 @@ function Navbar() {
   const checkAuth = async () => {
     try {
       const response = await fetch(
-        "https://muloanaptech.onrender.com/api/auth/me",
+        "https://muloanaptech-1.onrender.com/api/auth/me",
         {
           credentials: "include",
         },
@@ -37,7 +37,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("https://muloanaptech.onrender.com/api/auth/logout", {
+      await fetch("https://muloanaptech-1.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });
