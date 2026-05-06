@@ -4,11 +4,9 @@ import "./ApplyLoan.css";
 
 const ApplyLoan = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    emailAddress: "",
-    loanAmount: "",
-    loanTenure: "",
-    purpose: ""
+    amount: "",
+    purpose: "",
+    duration: ""
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -32,17 +30,17 @@ const ApplyLoan = () => {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
           credentials: "include",
-          body: JSON.stringify(formData),
-        },
+          body: JSON.stringify(formData)
+        }
       );
 
       const data = await response.json();
 
       if (response.ok) {
-        navigate("/loan");
+        navigate("/dashboard");
       } else {
         setError(data.error || "Application failed");
       }
@@ -62,35 +60,11 @@ const ApplyLoan = () => {
         
         <form onSubmit={handleSubmit} className="apply-form">
           <div className="input-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              placeholder="John Doe"
-              required
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              name="emailAddress"
-              value={formData.emailAddress}
-              onChange={handleChange}
-              placeholder="john@example.com"
-              required
-            />
-          </div>
-
-          <div className="input-group">
             <label>Loan Amount ($)</label>
             <input
               type="number"
-              name="loanAmount"
-              value={formData.loanAmount}
+              name="amount"
+              value={formData.amount}
               onChange={handleChange}
               placeholder="50000"
               required
@@ -98,19 +72,19 @@ const ApplyLoan = () => {
           </div>
 
           <div className="input-group">
-            <label>Loan Tenure</label>
+            <label>Loan Duration (months)</label>
             <select
-              name="loanTenure"
-              value={formData.loanTenure}
+              name="duration"
+              value={formData.duration}
               onChange={handleChange}
               required
             >
-              <option value="">Select tenure</option>
-              <option value="6 months">6 months</option>
-              <option value="1 year">1 year</option>
-              <option value="2 years">2 years</option>
-              <option value="3 years">3 years</option>
-              <option value="5 years">5 years</option>
+              <option value="">Select duration</option>
+              <option value="6">6 months</option>
+              <option value="12">1 year</option>
+              <option value="24">2 years</option>
+              <option value="36">3 years</option>
+              <option value="60">5 years</option>
             </select>
           </div>
 
