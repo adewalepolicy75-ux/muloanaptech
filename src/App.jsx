@@ -9,7 +9,7 @@ import Terms from "./components/Terms";
 import Faq from "./components/Faq";
 import Home from "./pages/Home";
 import Signup from "./components/Signup";
-import Login from "./components/Login";
+import Login from "./components/login";
 import Dashboard from "./components/Dashboard";
 import ApplyLoan from "./components/ApplyLoan";
 import LoanDetails from "./components/LoanDetails";
