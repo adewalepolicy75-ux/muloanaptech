@@ -33,7 +33,9 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/apply" element={<ApplyLoan />} />
 <Route path="/loan/:id" element={<LoanDetails />} />
-          <Route path="/loans" element={<Loans />} />  
+          <Route path="/loans" element={<Loans />} /> 
+          <Route path="/loans" element={<LoansDetails/>} /> 
+           
         </Routes>
         <Footer />
       </div>
