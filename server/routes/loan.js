@@ -41,17 +41,6 @@ router.post("/apply", auth, async (req, res) => {
   }
 });
 
-// Get user's loans
-router.get("/my-loans", auth, async (req, res) => {
-  try {
-    const loans = await Loan.find({ userId: req.user._id }).sort({ createdAt: -1 });
-    res.json({ loans });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
 // Get dashboard stats
 router.get("/dashboard/stats", auth, async (req, res) => {
   try {
@@ -65,6 +54,17 @@ router.get("/dashboard/stats", auth, async (req, res) => {
       totalRepayment: loans.reduce((sum, l) => sum + (l.totalPayment || 0), 0)
     };
     res.json({ stats });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Get user's loans
+router.get("/my-loans", auth, async (req, res) => {
+  try {
+    const loans = await Loan.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    res.json({ loans });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
