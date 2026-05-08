@@ -19,12 +19,9 @@ const Dashboard = () => {
       setLoading(true);
 
       // Fetch current user
-      const userResponse = await fetch(
-        "https://muloanaptech-1.onrender.com/api/auth/me",
-        {
-          credentials: "include",
-        },
-      );
+      const userResponse = await fetch("https://muloanaptech-1.onrender.com/api/auth/me", {
+        credentials: "include"
+      });
 
       if (!userResponse.ok) {
         throw new Error("Not authenticated");
@@ -34,29 +31,25 @@ const Dashboard = () => {
       setUser(userData.user);
 
       // Fetch dashboard stats
-      const statsResponse = await fetch(
-        "https://muloanaptech-1.onrender.com/api/loans/dashboard/stats",
-        {
-          credentials: "include",
-        },
-      );
+      const statsResponse = await fetch("https://muloanaptech-1.onrender.com/api/loans/dashboard/stats", {
+        credentials: "include"
+      });
 
       if (statsResponse.ok) {
         const statsData = await statsResponse.json();
         setStats(statsData.stats);
       }
 
-      const loansResponse = await fetch(
-        "https://muloanaptech-1.onrender.com/api/loans/my-loans",
-        {
-          credentials: "include",
-        },
-      );
+      // Fetch user loans
+      const loansResponse = await fetch("https://muloanaptech-1.onrender.com/api/loans/my-loans", {
+        credentials: "include"
+      });
 
       if (loansResponse.ok) {
         const loansData = await loansResponse.json();
         setLoans(loansData.loans);
       }
+
     } catch (err) {
       setError(err.message);
       navigate("/login");
@@ -69,10 +62,8 @@ const Dashboard = () => {
     try {
       await fetch("https://muloanaptech-1.onrender.com/api/auth/logout", {
         method: "POST",
-        credentials: "include",
+        credentials: "include"
       });
-
-      localStorage.removeItem("user");
       navigate("/login");
     } catch (err) {
       console.error("Logout error:", err);
@@ -107,38 +98,34 @@ const Dashboard = () => {
         <div className="stats-grid">
           <div className="stat-card">
             <h3>Total Loans</h3>
-            <div className="stat-value">{stats.totalLoans}</div>
+            <div className="stat-value">{stats.totalLoans || 0}</div>
           </div>
           <div className="stat-card">
             <h3>Pending</h3>
-            <div className="stat-value">{stats.pendingLoans}</div>
+            <div className="stat-value">{stats.pendingLoans || 0}</div>
           </div>
           <div className="stat-card">
             <h3>Approved</h3>
-            <div className="stat-value">{stats.approvedLoans}</div>
+            <div className="stat-value">{stats.approvedLoans || 0}</div>
           </div>
           <div className="stat-card">
             <h3>Active</h3>
-            <div className="stat-value">{stats.activeLoans}</div>
+            <div className="stat-value">{stats.activeLoans || 0}</div>
           </div>
           <div className="stat-card">
             <h3>Total Borrowed</h3>
-            <div className="stat-value">
-              ₦{stats.totalBorrowed?.toLocaleString()}
-            </div>
+            <div className="stat-value">₦{stats.totalBorrowed?.toLocaleString() || 0}</div>
           </div>
           <div className="stat-card">
             <h3>Total Repayment</h3>
-            <div className="stat-value">
-              ₦{stats.totalRepayment?.toLocaleString()}
-            </div>
+            <div className="stat-value">₦{stats.totalRepayment?.toLocaleString() || 0}</div>
           </div>
         </div>
       )}
 
       <div className="dashboard-content">
         <h2>My Loans</h2>
-
+        
         <button className="apply-loan-btn" onClick={handleApplyLoan}>
           Apply for New Loan
         </button>
@@ -158,24 +145,23 @@ const Dashboard = () => {
             <tbody>
               {loans.map((loan) => (
                 <tr key={loan._id}>
-                  <td>₦{loan.amount.toLocaleString()}</td>
+                  <td>₦{loan.amount?.toLocaleString() || 0}</td>
                   <td>{loan.purpose}</td>
                   <td>{loan.duration} months</td>
-                  <td>₦{parseFloat(loan.monthlyPayment).toLocaleString()}</td>
+                  <td>₦{parseFloat(loan.monthlyPayment || 0).toLocaleString()}</td>
                   <td>
                     <span className={`status-badge status-${loan.status}`}>
                       {loan.status}
                     </span>
                   </td>
-                  <td>{new Date(loan.appliedDate).toLocaleDateString()}</td>
+                  <td>{new Date(loan.appliedDate || loan.createdAt).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
           <div className="no-loans">
-            You haven't applied for any loans yet. Click the button above to get
-            started!
+            You haven't applied for any loans yet. Click the button above to get started!
           </div>
         )}
       </div>

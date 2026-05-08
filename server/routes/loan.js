@@ -7,30 +7,16 @@ const auth = require("../middleware/auth");
 router.post("/apply", auth, async (req, res) => {
   try {
     let { fullName, email, phoneNumber, amount, purpose, duration, interestRate } = req.body;
-
     amount = Number(amount);
     duration = Number(duration);
     interestRate = Number(interestRate) || 5;
 
     if (!fullName || !email || !phoneNumber || !amount || !purpose || !duration) {
-      return res
-        .status(400)
-        .json({ error: "Please provide all required fields" });
+      return res.status(400).json({ error: "Please provide all required fields" });
     }
 
-    if (amount <= 0 || duration <= 0) {
-      return res
-        .status(400)
-        .json({ error: "Amount and duration must be valid numbers" });
-    }
-
-    // Monthly interest rate
     const rate = interestRate / 100 / 12;
-
-    const monthlyPayment =
-      (amount * rate * Math.pow(1 + rate, duration)) /
-      (Math.pow(1 + rate, duration) - 1);
-
+    const monthlyPayment = (amount * rate * Math.pow(1 + rate, duration)) / (Math.pow(1 + rate, duration) - 1);
     const totalPayment = monthlyPayment * duration;
 
     const loan = await Loan.create({
@@ -44,12 +30,11 @@ router.post("/apply", auth, async (req, res) => {
       interestRate,
       monthlyPayment: Math.round(monthlyPayment * 100) / 100,
       totalPayment: Math.round(totalPayment * 100) / 100,
+      status: "pending",
+      appliedDate: new Date()
     });
 
-    res.status(201).json({
-      message: "Loan application submitted successfully",
-      loan,
-    });
+    res.status(201).json({ message: "Loan application submitted successfully", loan });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
@@ -57,24 +42,29 @@ router.post("/apply", auth, async (req, res) => {
 });
 
 // Get user's loans
-router.get("/", auth, async (req, res) => {
+router.get("/my-loans", auth, async (req, res) => {
   try {
     const loans = await Loan.find({ userId: req.user._id }).sort({ createdAt: -1 });
-    res.json(loans);
+    res.json({ loans });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// Get single loan
-router.get("/:id", auth, async (req, res) => {
+// Get dashboard stats
+router.get("/dashboard/stats", auth, async (req, res) => {
   try {
-    const loan = await Loan.findOne({ _id: req.params.id, userId: req.user._id });
-    if (!loan) {
-      return res.status(404).json({ error: "Loan not found" });
-    }
-    res.json(loan);
+    const loans = await Loan.find({ userId: req.user._id });
+    const stats = {
+      totalLoans: loans.length,
+      pendingLoans: loans.filter(l => l.status === "pending").length,
+      approvedLoans: loans.filter(l => l.status === "approved").length,
+      activeLoans: loans.filter(l => l.status === "approved").length,
+      totalBorrowed: loans.reduce((sum, l) => sum + l.amount, 0),
+      totalRepayment: loans.reduce((sum, l) => sum + (l.totalPayment || 0), 0)
+    };
+    res.json({ stats });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });

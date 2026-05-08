@@ -96,6 +96,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 40px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow-x: auto;
 }
 
 .dashboard-content h2 {
@@ -128,6 +129,7 @@
 .loans-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
 .loans-table thead {
