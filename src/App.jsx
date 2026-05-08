@@ -11,7 +11,6 @@ import Home from "./pages/Home";
 import Signup from "./components/Signup";
 import Login from "./components/login";
 import Dashboard from "./components/Dashboard";
-import LoanDetails from "./components/LoanDetails";
 import ApplyLoan from "./components/ApplyLoan";
 import LoanDetails from "./components/LoanDetails";
 import Loans from "./pages/Loans";
@@ -33,7 +32,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/apply" element={<ApplyLoan />} />
-<Route path="/loan/:id" element={<LoanDetails />} />
           <Route path="/loan/:id" element={<LoanDetails />} />
           <Route path="/loans" element={<Loans />} />
         </Routes>
