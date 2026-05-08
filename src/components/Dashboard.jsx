@@ -144,7 +144,7 @@ const Dashboard = () => {
             </thead>
             <tbody>
               {loans.map((loan) => (
-                <tr key={loan._id}>
+                <tr key={loan._id} style={{cursor: "pointer"}} onClick={() => navigate(`/loan/${loan._id}`)}>
                   <td>₦{loan.amount?.toLocaleString() || 0}</td>
                   <td>{loan.purpose}</td>
                   <td>{loan.duration} months</td>
