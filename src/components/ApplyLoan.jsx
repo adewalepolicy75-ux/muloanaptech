@@ -1,16 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ApplyLoan.css";
 
 const ApplyLoan = () => {
   const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
     amount: "",
     purpose: "",
     duration: ""
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  // Get logged in user data
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(
+          "https://muloanaptech-1.onrender.com/api/auth/me",
+          {
+            credentials: "include",
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data.user);
+          // Pre-fill form with user data
+          setFormData(prev => ({
+            ...prev,
+            fullName: data.user.name || "",
+            email: data.user.email || "",
+            phoneNumber: data.user.phone || "",
+          }));
+        } else {
+          navigate("/login");
+        }
+      } catch (error) {
+        navigate("/login");
+      }
+    };
+    fetchUser();
+  }, [navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -40,6 +74,7 @@ const ApplyLoan = () => {
       const data = await response.json();
 
       if (response.ok) {
+        alert("Loan application submitted successfully!");
         navigate("/dashboard");
       } else {
         setError(data.error || "Application failed");
@@ -59,6 +94,42 @@ const ApplyLoan = () => {
         {error && <div className="error-message">{error}</div>}
         
         <form onSubmit={handleSubmit} className="apply-form">
+          <div className="input-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Phone Number</label>
+            <input
+              type="tel"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="08012345678"
+              required
+            />
+          </div>
+
           <div className="input-group">
             <label>Loan Amount ($)</label>
             <input

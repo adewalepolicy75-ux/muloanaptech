@@ -70,8 +70,8 @@ function Navbar() {
 
           <li>
             <Link
-              to="/loans"
-              className={isActive("/loans") ? "nav-link active" : "nav-link"}
+              to="/Loans"
+              className={isActive("/Loans") ? "nav-link active" : "nav-link"}
             >
               Loans
             </Link>

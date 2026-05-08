@@ -8,6 +8,7 @@ import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
 import Faq from "./components/Faq";
 import Home from "./pages/Home";
+import Loans from "./pages/Loans";
 import Signup from "./components/Signup";
 import Login from "./components/login";
 import Dashboard from "./components/Dashboard";
@@ -28,9 +29,9 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-<Route path="/dashboard" element={<Dashboard />} />
-<Route path="/apply" element={<ApplyLoan />} />
-        
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/apply" element={<ApplyLoan />} />
+          <Route path="/loans" element={<Loans />} />  
         </Routes>
         <Footer />
       </div>

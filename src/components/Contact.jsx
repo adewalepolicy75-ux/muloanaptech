@@ -38,7 +38,7 @@ const Contact = () => {
         <h1>Contact Us</h1>
         <p>We’d love to hear from you. Fill out the form below.</p>
 
-        <div className="contact-info">
+        <div className="contact-page-info">
           <div className="info-item">
             <strong>Email:</strong> support@example.com
           </div>
