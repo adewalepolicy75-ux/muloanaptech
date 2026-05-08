@@ -34,7 +34,7 @@ function App() {
           <Route path="/apply" element={<ApplyLoan />} />
 <Route path="/loan/:id" element={<LoanDetails />} />
           <Route path="/loans" element={<Loans />} /> 
-          <Route path="/loans" element={<LoansDetails/>} /> 
+          <Route path="/loans" element={<LoanDetails/>} /> 
            
         </Routes>
         <Footer />
